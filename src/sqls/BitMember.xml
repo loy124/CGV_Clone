@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="Member">
+  
+<!--   <select id="allMember" resultType="bit.com.a.model.MemberDto">
+  	SELECT * FROM MEMBER
+  </select>
+  
+  <select id="getId" resultType="java.lang.String">
+  SELECT ID FROM MEMBER WHERE ID = #{id}
+  </select>
+  
+  <insert id="register" parameterType="bit.com.a.model.MemberDto">
+  	INSERT INTO MEMBER(ID, PWD, NAME, EMAIL, AUTH)
+  	 VALUES(#{id}, #{pwd}, #{name}, #{email}, 3)
+  	 
+  </insert>
+  <select id="login" parameterType="bit.com.a.model.MemberDto" resultType="bit.com.a.model.MemberDto">
+  SELECT ID, NAME, EMAIL, AUTH FROM MEMBER WHERE ID = #{id} and PWD = #{pwd}
+  </select>
+   -->
+  </mapper>

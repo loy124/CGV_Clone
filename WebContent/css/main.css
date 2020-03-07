@@ -1,0 +1,137 @@
+/* //nav */
+
+
+/* content */
+
+.content-header-container {
+    margin-top: 20px;
+    display: flex;
+    /* justify-content: center; */
+    flex-direction: column;
+    align-items: center;
+}
+
+.content-header-wrapper {
+    font-size: 15px;
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 6px;
+    border-bottom: 4px solid black;
+}
+
+.content-header-title {
+    font-size: 30px;
+    font-weight: bolder;
+}
+
+.content-header-menu {
+    display: flex;
+}
+
+.selectedMenu {
+    color: red;
+    font-size: 15px;
+}
+
+.movie-notice,
+.movie-house {
+    margin-left: 20px;
+}
+
+.movie-infomation-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 120px;
+    width: 1000px;
+    
+}
+
+.movie-informaion {
+    margin-left: 52px;
+    margin-bottom: 40px;
+    width: 185px;
+    /* border: 1px solid black; */
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.movie-rank {
+    text-align: center;
+    margin-bottom: 0.4px;
+    background-image: linear-gradient(45deg, #f83600 0%, #fcb69f 100%);
+    color: white;
+    padding: 3px;
+    height: 30px;
+    line-height: 24px;
+}
+
+.movie-title {
+    margin-top: 5px;
+    font-size: 15px;
+    font-weight: bold;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap
+}
+
+.movie-rate {
+    margin-top: 4px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.movie-date {
+    margin-top: 3px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.like-reserve-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 6px;
+    font-size: 14px;
+}
+
+.movie-like {
+    font-size: 13px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.likeButton {
+    width: 23px;
+    height: 23px;
+    margin-right: 5px;
+}
+
+.likeButton:hover {
+    background-image: url("../images/fullHeart.png");
+    background-position: center;
+    background-size: contain;
+}
+
+
+/* .poster-wrapper {
+    border: 3px solid black;
+} */
+
+.poster-wrapper img {
+    width: 185px;
+    height: 254px;
+}
+
+.poster-wrapper img:hover {
+    opacity: 0.5;
+}
+
+.reserveButton>img {
+    width: 59px;
+    border-radius: 5px;
+}
+
+
+/*// content */

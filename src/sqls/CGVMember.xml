@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<!--     CREATE TABLE CGV_MEMBER
+(
+    ID                  VARCHAR2(200)    NOT NULL, 
+    PASSWORD            VARCHAR2(200)    NULL, 
+    NAME                VARCHAR2(200)    NULL, 
+    PHONE_NUMBER        VARCHAR2(200)    NULL, 
+    EMAIL               VARCHAR2(200)    NULL,
+    ADDRESS				VARCHAR2(200)	 NULL,
+    AUTH                NUMBER(20)       NULL, 
+    REGISTER_DATE       DATE             NULL, 
+    UN_REGISTER_DATE    DATE             NULL, 
+    CONSTRAINT CGV_MEMBER_PK PRIMARY KEY (ID)
+)
+ -->
+  <mapper namespace="CGVMember">
+  
+<!--   <select id="allMember" resultType="bit.com.a.model.CGVMemberDto">
+  	SELECT * FROM MEMBER
+  </select> -->
+  
+  <select id="getId" resultType="java.lang.String">
+  SELECT ID FROM CGV_MEMBER WHERE ID = #{id}
+  </select>
+  
+  <insert id="register" parameterType="bit.com.a.model.CGVMemberDto">
+  	INSERT INTO CGV_MEMBER(ID, PASSWORD, NAME, PHONE_NUMBER, EMAIL, AUTH, REGISTER_DATE)
+  	 VALUES(#{id}, #{password}, #{name}, #{phoneNumber}, #{email}, 3, SYSDATE) 
+  	 
+  </insert>
+  <select id="login" parameterType="bit.com.a.model.CGVMemberDto" resultType="bit.com.a.model.CGVMemberDto">
+  SELECT ID, NAME, EMAIL, AUTH FROM CGV_MEMBER WHERE ID = #{id} and password = #{password}
+  </select>
+
+<select id="getMemberInfo" parameterType="bit.com.a.model.CGVMemberDto" resultType="bit.com.a.model.CGVMemberDto">
+  SELECT ID, PASSWORD, NAME, PHONE_NUMBER, EMAIL,
+   AUTH, REGISTER_DATE, UNREGISTER_DATE 
+  FROM WHERE ID = #{id}
+  </select>   
+   
+   
+  </mapper>

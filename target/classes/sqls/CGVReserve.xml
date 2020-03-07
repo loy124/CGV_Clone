@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!--CREATE TABLE CGV_RESERVE ( ID VARCHAR2(200) NULL, RESERVE_SEQ NUMBER(20) 
+	NOT NULL, TITLE VARCHAR2(200) NULL, RUNNING_TIME VARCHAR2(200) NULL, MOVIE_AGE 
+	VARCHAR2(200) NULL, MOVIE_DATE VARCHAR2(200) NULL, RESERVE_DATE DATE NULL, 
+	TICKET_NUMBER NUMBER(20) NULL, SELECTED_SEAT VARCHAR2(200) NULL, SELECTED_THEATER 
+	VARCHAR2(200) NULL, CONSTRAINT CGV_RESERVE_PK PRIMARY KEY (RESERVE_SEQ) ) 
+	/ CREATE SEQUENCE CGV_RESERVE_SEQ START WITH 1 INCREMENT BY 1; -->
+
+
+<mapper namespace="CGVReserve">
+	<resultMap id="CGVReserveDto"
+		type="bit.com.a.model.CGVReserveDto">
+		<id column="RESERVE_SEQ" property="reserveSequence" />
+		<result column="ID" property="id" />
+		<result column="TITLE" property="title" />
+		<result column="RUNNING_TIME" property="runningTime" />
+		<result column="MOVIE_AGE" property="movieAge" />
+		<result column="MOVIE_DATE" property="movieDate" />
+		<result column="RESERVE_DATE" property="reserveDate" />
+		<result column="TICKET_NUMBER" property="ticketNumber" />
+		<result column="SELECTED_SEAT" property="selectedSeat" />
+		<result column="SELECTED_THEATER" property="selectedTheater" />
+		<collection property="cgvPayDto" resultMap="CGVPayDto" />
+		<!-- <association javaType="bit.com.a.model.CGVReserveDto" property="cgvPayDto"></association> -->
+	</resultMap>
+
+	<resultMap id="CGVPayDto" type="bit.com.a.model.CGVPayDto">
+		<result column="ID" property="id" />
+		<result column="RESERVE_SEQ" property="reserveSequence" />
+		<result column="PAY_DATE" property="payDate" />
+		<result column="PAY_MONEY" property="payMoney" />
+	</resultMap>
+
+	<select id="selectMapping"
+		parameterType="bit.com.a.model.CGVReserveDto"
+		resultMap="CGVReserveDto">
+		SELECT A.ID, A.RESERVE_SEQ, A.TITLE, A.RUNNING_TIME,
+		A.MOVIE_AGE, A.MOVIE_DATE, A.RESERVE_DATE, A.TICKET_NUMBER, A.SELECTED_SEAT,
+		A.SELECTED_THEATER, B.PAY_MONEY, B.PAY_DATE
+		FROM CGV_RESERVE A, CGV_PAY B
+		WHERE A.RESERVE_SEQ = B.RESERVE_SEQ AND A.ID = #{id}
+		ORDER BY B.PAY_DATE DESC
+	</select>
+
+
+	<insert id="CGVReserve"
+		parameterType="bit.com.a.model.CGVReserveDto" useGeneratedKeys="true" keyColumn="reserveSequence">
+		
+		<selectKey keyProperty="reserveSequence" resultType="int"
+			order="BEFORE">
+			select CGV_RESERVE_SEQ.NEXTVAL reserveSequence
+			from DUAL
+		</selectKey>
+
+		INSERT INTO CGV_RESERVE(RESERVE_SEQ, ID, TITLE, RUNNING_TIME,
+		MOVIE_AGE, MOVIE_DATE, RESERVE_DATE, TICKET_NUMBER, SELECTED_SEAT,
+		SELECTED_THEATER)
+		VALUES(#{reserveSequence}, #{id}, #{title}, #{runningTime},
+		#{movieAge}, #{movieDate}, SYSDATE, #{ticketNumber}, #{selectedSeat},
+		#{selectedTheater})
+
+	</insert>
+
+	<select id="getCGVReserveList"
+		parameterType="bit.com.a.model.CGVReserveDto"
+		resultType="bit.com.a.model.CGVReserveDto" >
+		
+		SELECT ID, RESERVE_SEQ as reserveSequence, TITLE, RUNNING_TIME,
+		MOVIE_AGE, MOVIE_DATE, RESERVE_DATE, TICKET_NUMBER, SELECTED_SEAT,
+		SELECTED_THEATER
+		FROM CGV_RESERVE WHERE ID = #{id}
+		ORDER BY RESERVE_SEQ DESC
+	</select>
+
+	<select id="getCGVReserve"
+		parameterType="bit.com.a.model.CGVReserveDto"
+		resultType="bit.com.a.model.CGVReserveDto">
+		SELECT ID, RESERVE_SEQ as reserveSequence, TITLE, RUNNING_TIME,
+		MOVIE_AGE, MOVIE_DATE, RESERVE_DATE, TICKET_NUMBER, SELECTED_SEAT,
+		SELECTED_THEATER
+		FROM CGV_RESERVE WHERE ID = #{id}
+		ORDER BY RESERVE_SEQ DESC
+	</select>
+
+
+
+
+	<!-- <select id="allMember" resultType="bit.com.a.model.MemberDto"> SELECT 
+		* FROM MEMBER </select> <select id="getId" resultType="java.lang.String"> 
+		SELECT ID FROM MEMBER WHERE ID = #{id} </select> <insert id="register" parameterType="bit.com.a.model.MemberDto"> 
+		INSERT INTO MEMBER(ID, PWD, NAME, EMAIL, AUTH) VALUES(#{id}, #{pwd}, #{name}, 
+		#{email}, 3) </insert> <select id="login" parameterType="bit.com.a.model.MemberDto" 
+		resultType="bit.com.a.model.MemberDto"> SELECT ID, NAME, EMAIL, AUTH FROM 
+		MEMBER WHERE ID = #{id} and PWD = #{pwd} </select> -->
+
+	<!-- ALTER TABLE MEGABOX_RESERVE ADD CONSTRAINT FK_MEGABOX_RESERVE_ID_MEGABOX_ 
+		FOREIGN KEY (ID) REFERENCES MEGABOX_MEMBER (ID) -->
+</mapper>

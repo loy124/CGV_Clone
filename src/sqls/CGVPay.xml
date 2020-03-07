@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<!-- CREATE TABLE CGV_PAY
+(
+    ID             VARCHAR2(200)    NULL, 
+    RESERVE_SEQ    NUMBER(20)       NULL, 
+    PAY_DATE       DATE             NULL, 
+    PAY_MONEY      VARCHAR2(200)     NULL   
+)
+ -->
+  
+  <mapper namespace="CGVPay">
+  
+  <insert id="CGVPay" parameterType="bit.com.a.model.CGVPayDto">
+  INSERT INTO  CGV_PAY(ID, RESERVE_SEQ, PAY_DATE, PAY_MONEY) VALUES(#{id}, #{reserveSequence}, SYSDATE, #{payMoney})
+  </insert>
+  
+  <select id="getCGVData" resultType="bit.com.a.model.CGVPayDto">
+  SELECT ID, RESERVE_SEQ, PAY_DATE, PAY_MONEY FROM CGV_PAY WHERE ID = #{id}
+  </select>
+  
+  <!-- <select id="getCGVData" resultType="bit.com.a.model.CGVPayDto">
+  SELECT ID, RESERVE_SEQ, PAY_DATE, PAY_MONEY FROM CGV_PAY 
+  WHERE ID = #{id} AND RESERVE_SEQ = ${reserveSeq}  
+  </select> -->
+<!--   <select id="allMember" resultType="bit.com.a.model.MemberDto">
+  	SELECT * FROM MEMBER
+  </select>
+  
+  <select id="getId" resultType="java.lang.String">
+  SELECT ID FROM MEMBER WHERE ID = #{id}
+  </select>
+  
+  <insert id="register" parameterType="bit.com.a.model.MemberDto">
+  	INSERT INTO MEMBER(ID, PWD, NAME, EMAIL, AUTH)
+  	 VALUES(#{id}, #{pwd}, #{name}, #{email}, 3)
+  	 
+  </insert>
+  <select id="login" parameterType="bit.com.a.model.MemberDto" resultType="bit.com.a.model.MemberDto">
+  SELECT ID, NAME, EMAIL, AUTH FROM MEMBER WHERE ID = #{id} and PWD = #{pwd}
+  </select>
+   -->
+  </mapper>
